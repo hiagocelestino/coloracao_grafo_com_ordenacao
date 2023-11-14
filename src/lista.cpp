@@ -5,8 +5,6 @@ Lista::Lista() {
 };
 
 Lista::~Lista() {
-    delete inicio;
-    delete fim;
 }
 
 Lista::Lista(int labelVertice) {
