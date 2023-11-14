@@ -1,9 +1,6 @@
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
 
-/*  Você pode inserir os includes necessários para que sua classe funcione.
- * Nenhuma outra alteração neste arquivo é permitida
- */
 #include <iostream>
 #include "lista.hpp"
 #include "celula.hpp"
