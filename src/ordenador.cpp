@@ -135,24 +135,32 @@ void Ordenador::heapSort(Lista *vertices, int tamanho) {
     }
 };
 
-void Ordenador::_heapify(Lista *vertices, int tamanho, int i) {
-    int maior = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+void Ordenador::_heapify(Lista *vertices, int tamanho, int indice) {
+    int menor = indice;
+    int esq = 2 * indice + 1;
+    int dir = 2 * indice + 2;
 
-    if (left < tamanho && (vertices[left].getCor() > vertices[maior].getCor() ||
-                            (vertices[left].getCor() == vertices[maior].getCor() && vertices[left].getLabel() < vertices[maior].getLabel()))) {
-        maior = left;
+    if(esq < tamanho) {
+        if (vertices[esq].getCor() > vertices[menor].getCor()
+            || (vertices[esq].getCor() == vertices[menor].getCor()
+                && vertices[esq].getLabel() > vertices[menor].getLabel())
+        ) {
+            menor = esq;
+        }
     }
 
-    if (right < tamanho && (vertices[right].getCor() > vertices[maior].getCor() ||
-                             (vertices[right].getCor() == vertices[maior].getCor() && vertices[right].getLabel() < vertices[maior].getLabel()))) {
-        maior = right;
+    if (dir < tamanho) {
+        if (vertices[dir].getCor() > vertices[menor].getCor()
+        || (vertices[dir].getCor() == vertices[menor].getCor()
+                && vertices[dir].getLabel() > vertices[menor].getLabel())
+        ) {
+            menor = dir;
+        }
     }
 
-    if (maior != i) {
-        _swap(vertices, i, maior);
-        _heapify(vertices, tamanho, maior);
+    if (menor != indice) {
+        _swap(vertices, menor, indice);
+        _heapify(vertices, tamanho, menor);
     }
 }
 
