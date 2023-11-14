@@ -37,11 +37,18 @@ void Ordenador::selectionSort(Lista *vertices, int tamanho) {
     for( i = 0; i < tamanho -1; i++ ) {
         min = i;
         for (j = i + 1; j < tamanho; j++) {
-            if ( vertices[j].getCor() < vertices[min].getCor() ) {
+            if ( vertices[j].getCor() < vertices[min].getCor() || 
+            ( vertices[j].getCor() == vertices[min].getCor() && vertices[j].getLabel() < vertices[min].getLabel() )
+            ) {
                 min = j;
             }
         }
-        _swap(vertices, i, min);
+        
+        Lista aux = vertices[min];
+        for ( int k = min; k > i; k--) {
+            vertices[k] = vertices[k - 1];
+        }
+        vertices[i] = aux;
     }
 };
 
