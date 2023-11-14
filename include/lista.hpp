@@ -7,6 +7,7 @@
 class Lista {
     public:
         Lista();
+        ~Lista();
         Lista(int numero_vertice);
         int getTamanho();
         Celula *getInicio();

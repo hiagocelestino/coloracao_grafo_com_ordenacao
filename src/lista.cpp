@@ -4,6 +4,11 @@ Lista::Lista() {
 
 };
 
+Lista::~Lista() {
+    delete inicio;
+    delete fim;
+}
+
 Lista::Lista(int labelVertice) {
     tamanho = 0;
     inicio = nullptr;
