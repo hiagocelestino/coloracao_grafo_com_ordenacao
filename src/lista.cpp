@@ -4,11 +4,16 @@ Lista::Lista() {
 
 };
 
-Lista::Lista(int numero_vertice) {
+Lista::Lista(int labelVertice) {
     tamanho = 0;
     inicio = nullptr;
     fim = nullptr;
+    label = labelVertice;
 };
+
+unsigned int Lista::getLabel() {
+    return label;
+}
 
 int Lista::getTamanho() {
     return tamanho;
@@ -42,11 +47,12 @@ void Lista::setCor(int c) {
 };
 
 void Lista::imprimir() {
-    // Celula *valor = inicio;
-    // while(valor != nullptr) {
-    //     std::cout << valor->getConteudo() << std::endl;
-    //     valor = valor->getProximo();
-    // }
+    std::cout << "VIZINHO" << std::endl;
+    Celula *valor = inicio;
+    while(valor != nullptr) {
+        std::cout << valor->getConteudo() << " ";
+        valor = valor->getProximo();
+    }
+    std::cout << std::endl;
 
-    std::cout << "Coloração: " << cor << std::endl;
 }

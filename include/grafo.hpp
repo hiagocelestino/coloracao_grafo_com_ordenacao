@@ -14,17 +14,14 @@ class Grafo{
         Grafo(int num_vertices);
         ~Grafo();
 
-        void InsereAresta(int v, int w);
-
-        int QuantidadeVertices();
-        int QuantidadeArestas();
-
-        int GrauMinimo();
-        int GrauMaximo();
-
-        void ImprimeVizinhos(int v);
+        Lista *getVertices();
+        void setVertices(Lista *novos_vertices);
+        void setAresta(int v, int w);
+        int getQuantidadeVertices();
+        void imprimeVizinhos(int v);
         void colorirVertice(int v, int c);
         int verificaColoracaoGulosa();
+        void imprimeVertices();
     private:
         Lista *vertices;
         int num_vertices;

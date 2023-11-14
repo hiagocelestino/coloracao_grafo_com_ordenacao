@@ -1,5 +1,6 @@
 #include "grafo.hpp"
 
+using namespace std;
 Grafo::Grafo(int numero_vertices) {
     vertices = new Lista[numero_vertices];
     num_vertices = numero_vertices;
@@ -14,31 +15,34 @@ Grafo::~Grafo() {
     delete vertices;
 };
 
-void Grafo::InsereAresta(int v, int w) {
+Lista* Grafo::getVertices() {
+    return vertices;
+};
+
+void Grafo::setVertices(Lista *novos_vertices) {
+    vertices = novos_vertices;
+}
+
+void Grafo::setAresta(int v, int w) {
     Celula *valor = new Celula();
     valor->setConteudo(w);
     vertices[v].adicionaItem(valor);
 };
 
-int Grafo::QuantidadeVertices() {
+int Grafo::getQuantidadeVertices() {
     return num_vertices;
 };
 
-int Grafo::QuantidadeArestas() {
-    return 0;
-};
-
-int Grafo::GrauMinimo() {
-    return 0;
-};
-
-int Grafo::GrauMaximo() {
-    return 0;
-};
-
-void Grafo::ImprimeVizinhos(int v) {
-    std::cout << "Vértice: " << v << std::endl;
+void Grafo::imprimeVizinhos(int v) {
+    cout << "Vértice: " << v << endl;
     vertices[v].imprimir();
+};
+
+void Grafo::imprimeVertices() {
+    for(int i = 0; i < num_vertices; i++) {
+        cout << vertices[i].getLabel() << " ";
+    }
+    cout << endl;
 };
 
 void Grafo::colorirVertice(int vertice, int cor) {
@@ -50,20 +54,21 @@ int Grafo::verificaColoracaoGulosa() {
 
     for( int i = 0; i < num_vertices; i++ ) {
         int cor_vertice = vertices[i].getCor();
-        int cores_necessarias[cor_vertice] = {0};
+        if (cor_vertice <= 1) continue;
+        int cores_necessarias[cor_vertice - 1] = {0};
 
         Celula *vizinho = vertices[i].getInicio();
         while ( vizinho != nullptr ) {
-            int cor_vizinho = vertices[vizinho->getConteudo()].getCor();
-            if (cor_vizinho > cor_vertice) {
-                coloracao_gulosa = 0;
-                break;
+            int label_vizinho = vizinho->getConteudo();
+            int cor_vizinho = vertices[label_vizinho].getCor();
+
+            if (cor_vizinho < cor_vertice) {
+                cores_necessarias[cor_vizinho - 1] = 1;
             }
-            cores_necessarias[cor_vizinho] = 1;
-            vizinho->getProximo();
+            vizinho = vizinho->getProximo();
         }
 
-        for ( int j = 0; j < cor_vertice; j++ ) {
+        for ( int j = 0; j < cor_vertice - 1; j++ ) {
             if (cores_necessarias[j] == 0) {
                 coloracao_gulosa = 0;
                 break;

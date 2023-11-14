@@ -5,24 +5,7 @@
 #include "ordenador.hpp"
 
 using namespace std;
-int main(int argc, char *argv[]) {
-    
-    // if (argc < 3) {
-    //     cout << "Faltam parâmetros." << endl;
-    //     return 1; 
-    // }
-    // string parametro = argv[1];
-    // string expressao = argv[2];
-    // string valores = argv[3];
-
-    // – b: Método da bolha ou bubble sort.
-    // – s: Método da seleção ou selection sort.
-    // – i: Método da inserção ou insertion sort.
-    // – q: quicksort.
-    // – m: mergesort.
-    // – p: heapsort.
-    // – y: Seu próprio método de ordenação.
-
+int main() {
     char ordenacao;
     int num_vertices;
 
@@ -30,7 +13,7 @@ int main(int argc, char *argv[]) {
     cin >> num_vertices;
     
     string valores;
-    Grafo grafo = Grafo(num_vertices);
+    Grafo *grafo = new Grafo(num_vertices);
 
     for(int i = 0; i < num_vertices; i++) {
         int num_vizinhos;
@@ -38,17 +21,17 @@ int main(int argc, char *argv[]) {
         cin >> num_vizinhos;
         for (int j = 0; j < num_vizinhos; j++) {
             cin >> vertice;
-            grafo.InsereAresta(i, vertice);
+            grafo->setAresta(i, vertice);
         }
     }
 
     for(int i = 0; i < num_vertices; i++) {
         int cor;
         cin >> cor;
-        grafo.colorirVertice(i, cor);
+        grafo->colorirVertice(i, cor);
     }
 
-    int coloracao_gulosa = grafo.verificaColoracaoGulosa();
+    int coloracao_gulosa = grafo->verificaColoracaoGulosa();
 
     if ( coloracao_gulosa == 0 ) {
         cout << coloracao_gulosa << endl;
@@ -59,30 +42,32 @@ int main(int argc, char *argv[]) {
 
     switch(ordenacao) {
         case 'b':
-            ordenador.bubbleSort();
+            ordenador.bubbleSort(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         case 's':
-            ordenador.selectionSort();
+            ordenador.selectionSort(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         case 'i':
-            ordenador.insertionSort();
+            ordenador.insertionSort(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         case 'q':
-            ordenador.insertionSort();
+            ordenador.quickSort(grafo->getVertices(), 0, grafo->getQuantidadeVertices() - 1);
+            ordenador.mantemPosicoes(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         case 'm':
-            ordenador.insertionSort();
+            ordenador.mergeSort(grafo->getVertices(), 0, grafo->getQuantidadeVertices() - 1);
             break;
         case 'p':
-            ordenador.insertionSort();
+            ordenador.heapSort(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         case 'y':
-            ordenador.insertionSort();
+            ordenador.sort();
             break;
         default:
             throw ("Entrada Inválida.");
     }
     
-    
+    cout << 1 << " ";
+    grafo->imprimeVertices();
     return 0;
 }

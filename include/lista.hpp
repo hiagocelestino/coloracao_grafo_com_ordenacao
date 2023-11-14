@@ -17,9 +17,11 @@ class Lista {
         int getCor();
         void setCor(int c);
         void imprimir();
+        unsigned int getLabel();
 
     private:
         unsigned int tamanho;
+        unsigned int label;
         int cor;
         Celula *inicio;
         Celula *fim;
