@@ -12,7 +12,6 @@ class Celula {
         void setConteudo(int valor);
         Celula *getProximo();
         void setProximo(Celula *proximo);
-        int verificaColoracaoGulos();
     private:
         int conteudo;
         Celula *prox;

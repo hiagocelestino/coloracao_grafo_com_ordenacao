@@ -52,7 +52,6 @@ int main() {
             break;
         case 'q':
             ordenador.quickSort(grafo->getVertices(), 0, grafo->getQuantidadeVertices() - 1);
-            ordenador.mantemPosicoes(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         case 'm':
             ordenador.mergeSort(grafo->getVertices(), 0, grafo->getQuantidadeVertices() - 1);

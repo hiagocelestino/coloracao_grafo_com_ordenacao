@@ -1,6 +1,8 @@
 #include "ordenador.hpp"
 
-void _swap(Lista *lista, int pos1, int pos2) {
+Ordenador::Ordenador() {};
+
+void Ordenador::_swap(Lista *lista, int pos1, int pos2) {
     if (pos1 == pos2) {
         return;
     }
@@ -17,8 +19,6 @@ void _swap(Lista *lista, int pos1, int pos2) {
     lista[pos2] = aux;
 
 }
-
-Ordenador::Ordenador() {};
 
 void Ordenador::bubbleSort(Lista *vertices, int tamanho) {
     int realizouTroca;
@@ -75,11 +75,11 @@ void Ordenador::mergeSort(Lista *vertices, int inicio, int fim) {
         int meio = inicio + (fim - inicio) / 2;
         mergeSort(vertices, inicio, meio);
         mergeSort(vertices, meio + 1, fim);
-        merge(vertices, inicio, meio, fim);
+        _merge(vertices, inicio, meio, fim);
     }
 }
 
-void Ordenador::merge(Lista *vertices, int esq, int meio, int dir) {
+void Ordenador::_merge(Lista *vertices, int esq, int meio, int dir) {
     int tam_esq = meio - esq + 1;
     int tam_dir = dir - meio;
 
@@ -127,45 +127,45 @@ void Ordenador::merge(Lista *vertices, int esq, int meio, int dir) {
 
 void Ordenador::heapSort(Lista *vertices, int tamanho) { 
     for (int i = tamanho / 2 - 1; i >= 0; i--)
-        heapify(vertices, tamanho, i);
+        _heapify(vertices, tamanho, i);
  
     for (int i = tamanho - 1; i > 0; i--) {
         _swap(vertices, 0, i);
-        heapify(vertices, i, 0);
+        _heapify(vertices, i, 0);
     }
 };
 
-void Ordenador::heapify(Lista *vertices, int tamanho, int i) {
+void Ordenador::_heapify(Lista *vertices, int tamanho, int i) {
     int maior = i;
-
     int left = 2 * i + 1;
     int right = 2 * i + 2;
 
-    if(left < tamanho && vertices[left].getCor() > vertices[maior].getCor()){
+    if (left < tamanho && (vertices[left].getCor() > vertices[maior].getCor() ||
+                            (vertices[left].getCor() == vertices[maior].getCor() && vertices[left].getLabel() < vertices[maior].getLabel()))) {
         maior = left;
     }
 
-    if(right < tamanho && vertices[right].getCor() > vertices[maior].getCor()){
+    if (right < tamanho && (vertices[right].getCor() > vertices[maior].getCor() ||
+                             (vertices[right].getCor() == vertices[maior].getCor() && vertices[right].getLabel() < vertices[maior].getLabel()))) {
         maior = right;
     }
 
     if (maior != i) {
         _swap(vertices, i, maior);
-        heapify(vertices, tamanho, maior);
+        _heapify(vertices, tamanho, maior);
     }
-
 }
 
 void Ordenador::quickSort(Lista *vertices, int inicio, int fim) {
     if (inicio >= fim) return;
 
-    int pivot = particao(vertices, inicio, fim);
+    int pivot = _particao(vertices, inicio, fim);
 
     quickSort(vertices, inicio, pivot - 1);
     quickSort(vertices, pivot + 1, fim);
 }
 
-int Ordenador::particao(Lista *vertices, int inicio, int fim) {
+int Ordenador::_particao(Lista *vertices, int inicio, int fim) {
     int i = inicio;
 
     for ( int j = inicio; j < fim; j++) {
@@ -179,16 +179,6 @@ int Ordenador::particao(Lista *vertices, int inicio, int fim) {
     _swap(vertices, i, fim);
 
     return i;
-};
-
-void Ordenador::mantemPosicoes(Lista *vertices, int tamanho) {
-    for ( int i = 0; i < tamanho - 1; i++) {
-        if (vertices[i].getLabel() > vertices[i+1].getLabel()) {
-            if (vertices[i].getCor() == vertices[i+1].getCor()) {
-                _swap(vertices, i, i + 1);
-            }
-        }
-    }
 };
 
 void Ordenador::sort() {
