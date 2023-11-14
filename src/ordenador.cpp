@@ -1,6 +1,9 @@
 #include "ordenador.hpp"
 
 void _swap(Lista *lista, int pos1, int pos2) {
+    if (pos1 == pos2) {
+        return;
+    }
 
     if (lista[pos1].getCor() == lista[pos2].getCor()){
         if (lista[pos1].getLabel() < lista[pos2].getLabel()) {
@@ -166,7 +169,10 @@ int Ordenador::particao(Lista *vertices, int inicio, int fim) {
     int i = inicio;
 
     for ( int j = inicio; j < fim; j++) {
-        if (vertices[j].getCor() <= vertices[fim].getCor() ) {
+        if (vertices[j].getCor() < vertices[fim].getCor()
+            || (vertices[j].getCor() == vertices[fim].getCor() 
+                && vertices[j].getLabel() <= vertices[fim].getLabel())
+        ) {
             _swap(vertices, i++, j);
         }
     }
