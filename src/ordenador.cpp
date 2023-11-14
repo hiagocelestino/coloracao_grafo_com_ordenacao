@@ -46,13 +46,13 @@ void Ordenador::selectionSort(Lista *vertices, int tamanho) {
 };
 
 void Ordenador::insertionSort(Lista *vertices, int tamanho) {
-    int i, j;
+    int i = 0, j = 0;
     Lista aux;
-    for(i = 2; i <= tamanho; i++) {
+    for(i = 1; i < tamanho; i++) {
         aux = vertices[i];
         j = i - 1;
-        vertices[0] = aux; // Sentinela
-        while( aux.getCor() < vertices[j].getCor() ) {
+
+        while( aux.getCor() < vertices[j].getCor() && j >= 0) {
             vertices[j + 1] = vertices[j];
             j--;
         }
