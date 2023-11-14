@@ -189,6 +189,39 @@ int Ordenador::_particao(Lista *vertices, int inicio, int fim) {
     return i;
 };
 
-void Ordenador::sort() {
+void Ordenador::countingsort(Lista *vertices, int tamanho) {
+    if (tamanho <= 1) {
+        return;
+    }
 
-};
+    int max_cor = vertices[0].getCor();
+    for (int i = 1; i < tamanho; i++) {
+        if (vertices[i].getCor() > max_cor) {
+            max_cor = vertices[i].getCor();
+        }
+    }
+
+    int contadores[max_cor + 1] = {0};
+
+    for (int i = 0; i < tamanho; i++) {
+        contadores[vertices[i].getCor()]++;
+    }
+
+    for (int i = 1; i <= max_cor; i++) {
+        contadores[i] += contadores[i - 1];
+    }
+
+    Lista *temp = new Lista[tamanho];
+
+    for (int i = tamanho - 1; i >= 0; i--) {
+        int cor = vertices[i].getCor();
+        temp[contadores[cor] - 1] = vertices[i];
+        contadores[cor]--;
+    }
+
+    for (int i = 0; i < tamanho; i++) {
+        vertices[i] = temp[i];
+    }
+
+    delete[] temp;
+}

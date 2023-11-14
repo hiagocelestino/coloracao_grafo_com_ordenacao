@@ -60,7 +60,7 @@ int main() {
             ordenador.heapSort(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         case 'y':
-            ordenador.sort();
+            ordenador.countingsort(grafo->getVertices(), grafo->getQuantidadeVertices());
             break;
         default:
             throw ("Entrada Inválida.");

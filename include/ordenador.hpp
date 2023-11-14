@@ -12,7 +12,7 @@ class Ordenador{
         void mergeSort(Lista *vertices, int inicio, int fim);
         void heapSort(Lista *vertices, int tamanho);
         void quickSort(Lista *vertices, int inicio, int fim);
-        void sort();
+        void countingsort(Lista *vertices, int tamanho);
     private:
         void _swap(Lista *lista, int pos1, int pos2);
         void _heapify(Lista *vertices, int tamanho, int i);
